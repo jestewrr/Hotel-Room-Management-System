@@ -1,0 +1,81 @@
+package Activity;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class HotelBST {
+	Room root;
+
+    // Insert a room in the BST
+    public Room insertRoom(Room root, int roomNumber) {
+        if (root == null) {
+            return new Room(roomNumber);
+        }
+        if (roomNumber < root.roomNumber) {
+            root.left = insertRoom(root.left, roomNumber);
+        } else if (roomNumber > root.roomNumber) {
+            root.right = insertRoom(root.right, roomNumber);
+        }
+        return root;
+    }
+
+    // Book a room by assigning guest name
+    public void bookRoom(Room root, int roomNumber, String guestName) {
+        if (root == null) {
+            System.out.println("Room " + roomNumber + " not found!");
+            return;
+        }
+        if (roomNumber == root.roomNumber) {
+            if (root.guestName.equals("")) {
+                root.guestName = guestName;
+                System.out.println("Room " + roomNumber + " is now booked for " + guestName);
+            } else {
+                System.out.println("Room " + roomNumber + " is already booked!");
+            }
+        } else if (roomNumber < root.roomNumber) {
+            bookRoom(root.left, roomNumber, guestName);
+        } else {
+            bookRoom(root.right, roomNumber, guestName);
+        }
+    }
+
+    // Inorder Traversal (Left, Root, Right)
+    public void inorder(Room root) {
+        if (root != null) {
+            inorder(root.left);
+            System.out.println("Room " + root.roomNumber + (root.guestName.equals("") ? " is available" : " is booked by " + root.guestName));
+            inorder(root.right);
+        }
+    }
+
+    // Preorder Traversal (Root, Left, Right)
+    public void preorder(Room root) {
+        if (root != null) {
+            System.out.println("Room " + root.roomNumber + (root.guestName.equals("") ? " is available" : " is booked by " + root.guestName));
+            preorder(root.left);
+            preorder(root.right);
+        }
+    }
+
+    // Postorder Traversal (Left, Right, Root)
+    public void postorder(Room root) {
+        if (root != null) {
+            postorder(root.left);
+            postorder(root.right);
+            System.out.println("Room " + root.roomNumber + (root.guestName.equals("") ? " is available" : " is booked by " + root.guestName));
+        }
+    }
+
+    // Level Order Traversal (Breadth First Search)
+    public void levelOrder(Room root) {
+        if (root == null) return;
+        Queue<Room> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Room current = queue.poll();
+            System.out.println("Room " + current.roomNumber + (current.guestName.equals("") ? " is available" : " is booked by " + current.guestName));
+            if (current.left != null) queue.add(current.left);
+            if (current.right != null) queue.add(current.right);
+        }
+    }
+}
