@@ -1,0 +1,20 @@
+package Activity;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+public class Room {
+
+	int roomNumber;
+	String guestName; 
+	Room left, right;
+	
+	
+	public Room(int roomNumber) {
+		this.roomNumber = roomNumber;
+		this.guestName = "";
+		left = right = null;
+
+
+	}
+
+}
