@@ -1,0 +1,56 @@
+package Activity;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class HotelRoom {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        HotelBST hotel = new HotelBST();
+
+        // Insert some rooms
+        hotel.root = hotel.insertRoom(hotel.root, 101);
+        hotel.root = hotel.insertRoom(hotel.root, 102);
+        hotel.root = hotel.insertRoom(hotel.root, 103);
+        hotel.root = hotel.insertRoom(hotel.root, 104);
+        hotel.root = hotel.insertRoom(hotel.root, 105);
+
+
+        // Display menu
+        while (true) {
+        	 System.out.println("\n--- Hotel Management System ---");
+        	 System.out.println("Rooms : 101,102,103,104,105");
+             System.out.println("1. Inorder Traversal");
+             System.out.println("2. Preorder Traversal");
+             System.out.println("3. Book a Room");
+             System.out.println("4. Exit");
+             System.out.print("Choose an option: ");
+             int choice = scanner.nextInt();
+             
+            switch (choice) {
+                case 1:
+                    System.out.println("Inorder Traversal:");
+                    hotel.inorder(hotel.root);
+                    break;
+                case 2:
+                    System.out.println("Preorder Traversal:");
+                    hotel.preorder(hotel.root);
+                    break;
+                case 3:
+                    System.out.print("Enter room number: ");
+                    int roomNumber = scanner.nextInt();
+                    scanner.nextLine(); 
+                    System.out.print("Enter guest name: ");
+                    String guestName = scanner.nextLine();
+                    hotel.bookRoom(hotel.root, roomNumber, guestName);
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice, try again.");
+            }
+        }
+    }
+}
